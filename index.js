@@ -1,6 +1,6 @@
 var Chance=require("chance");
 
-var fauxPoe=function(seed){
+module.exports=function(seed){
   var c = seed ? new Chance(seed) : new Chance();
   var nouns=[
     "maiden",
@@ -51,9 +51,12 @@ var fauxPoe=function(seed){
     "the",
     "that",
     "their",
-    "her"
+    "her",
+    "our",
+    "my"
     ];
     
+  //past-tense single
   var verbs=[
     "was",
     "wandered",
@@ -62,14 +65,19 @@ var fauxPoe=function(seed){
     "lied",
     "wondered",
     "dreamed",
-    "breathed"
+    "breathed",
+    "dwelt",
+    "slept"
     ];  
   
   var rhymingAdjectives=[
     ["torn","forelorn"],
     ["cold","old"],
     ["tall","small"],
-    ["vast","fast"]
+    ["vast","fast"],
+    ["sleeping","keeping"],
+    ["fled","bled"],
+    ["forgotten","begotten"]
     ];
     
   var rhymingNouns=[
@@ -78,8 +86,9 @@ var fauxPoe=function(seed){
     ["hell","bell"],
     ["ghost","host"],
     ["fire","pyre"],
-    ["king","string"],
-    ["fate","weight"]
+    ["king","ring"],
+    ["fate","gate"],
+    ["castle","vassal"]
     ];
 
     
@@ -135,7 +144,3 @@ var fauxPoe=function(seed){
   d+=combineLines(couplet(), personalCouplet() );
   return d;
 };
-
-for (var i=0;i<10;i++){
-console.log( fauxPoe() );
-}
