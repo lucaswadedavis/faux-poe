@@ -21,37 +21,90 @@ var fauxPoe=function(seed){
     ];
   var adjectives=[
     "broken",
-    "torn",
     "wandering",
-    "forelorn"
+    "lost",
+    "last",
+    "beloved"
     ];
-  var pPhrase=function(){
+  
+  var articles=[
+    "the",
+    "that",
+    "their",
+    "her"
+    ];
+    
+  var rhymingAdjectives=[
+    ["torn","forelorn"],
+    ["cold","old"],
+    ["tall","small"],
+    ["vast","fast"]
+    ];
+    
+  var rhymingNouns=[
+    ["tomb","room"],
+    ["place","space"],
+    ["hell","bell"],
+    ["ghost","host"],
+    ["fire","pyre"],
+    ["king","string"],
+    ["fate","weight"]
+    ];
+
+    
     var phrases=[
-      "in the valley of the",
-      "in the",
-      "upon the",
-      "on the",
-      "with the",
-      "by the",
-      "beside the",
-      "within the",
-      "beneath the"
-      ]
-    return c.pick(phrases)+" "+c.pick(nouns);
+      "in the valley of",
+      "in",
+      "upon",
+      "on",
+      "with",
+      "by",
+      "beside",
+      "within",
+      "beneath"
+      ];
+    
+  var pPhrase=function(){
+    return c.pick(phrases)+" "+c.pick(articles)+" "+c.pick(nouns);
   };
   var d="";
   
+  var oddLine=function(){
+    return (c.first({gender:'female'})+" "+c.pick(adjectives)+" "+c.pick(adjectives)+".");
+  }
+  
   var couplet=function(){
+    var rhyme=c.pick(rhymingAdjectives);
     var d=[];
-    d.push(pPhrase()+" was a "+c.pick(nouns)+", "+c.pick(adjectives));
-    d.push(c.first({gender:'female'})+" "+c.pick(adjectives)+" "+c.pick(adjectives)+".");
+    d.push(pPhrase()+" was a "+c.pick(nouns)+", "+c.pick(adjectives)+" and "+rhyme[0]);
+    d.push(pPhrase()+" was a "+c.pick(nouns)+", so "+rhyme[1]);
     return d;
   };
-  var combineLines=function(l1,l2){
-    return l1[0]+"\n"+l2[0]+"\n"+l1[1]+"\n"+l2[1];
+  
+  var personalCouplet=function(){
+    var rhyme=c.pick(rhymingNouns);
+    var d=[];
+    d.push(c.first({gender:'female'})+" "+pPhrase()+" "+c.pick(adjectives)+" "+rhyme[0]);
+    d.push(pPhrase()+", "+c.pick(adjectives)+" "+c.pick(adjectives)+" "+rhyme[1]);
+    return d;
   };
-  d+=combineLines(couplet(), couplet() );
+  
+  var combineLines=function(l1,l2){
+    l1[0]=l1[0][0].toUpperCase()+(l1[0]).substring(1);
+    
+    l1[1]=l1[1][0].toUpperCase()+(l1[1]).substring(1);
+    
+    l2[0]=l2[0][0].toUpperCase()+(l2[0]).substring(1);
+    
+    l2[1]=l2[1][0].toUpperCase()+(l2[1]).substring(1);
+    
+    return l1[0]+",\n"+l2[0]+",\n"+l1[1]+",\n"+l2[1];
+  };
+  
+  d+=combineLines(couplet(), personalCouplet() );
   return d;
 };
 
+for (var i=0;i<10;i++){
 console.log( fauxPoe() );
+}
