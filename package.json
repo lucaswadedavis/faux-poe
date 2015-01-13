@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lucaswadedavis/faux-poe/issues"
   },
-  "homepage": "https://github.com/lucaswadedavis/faux-poe"
+  "homepage": "https://github.com/lucaswadedavis/faux-poe",
+  "dependencies": {
+    "chance": "^0.7.1"
+  }
 }
