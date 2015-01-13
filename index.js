@@ -16,14 +16,34 @@ var fauxPoe=function(seed){
     "heart",
     "love",
     "night",
-    "bosom",
-    "star"
+    "dream",
+    "star",
+    "locket",
+    "route",
+    "path",
+    "road",
+    "hall",
+    "stranger",
+    "winter",
+    "stage",
+    "season",
+    "ring"
     ];
   var adjectives=[
+    "abandoned",
+    "afraid",
+    "aweful",
+    "great",
+    "beautiful",
+    "black",
+    "red",
+    "white",
+    "pale",
+    "iron",
+    "empty",
     "broken",
     "wandering",
     "lost",
-    "last",
     "beloved"
     ];
   
@@ -34,6 +54,17 @@ var fauxPoe=function(seed){
     "her"
     ];
     
+  var verbs=[
+    "was",
+    "wandered",
+    "stalked",
+    "hid",
+    "lied",
+    "wondered",
+    "dreamed",
+    "breathed"
+    ];  
+  
   var rhymingAdjectives=[
     ["torn","forelorn"],
     ["cold","old"],
@@ -77,15 +108,15 @@ var fauxPoe=function(seed){
     var rhyme=c.pick(rhymingAdjectives);
     var d=[];
     d.push(pPhrase()+" was a "+c.pick(nouns)+", "+c.pick(adjectives)+" and "+rhyme[0]);
-    d.push(pPhrase()+" was a "+c.pick(nouns)+", so "+rhyme[1]);
+    d.push(pPhrase()+" "+c.pick(verbs)+" "+c.pick(articles)+" "+c.pick(nouns)+", so "+rhyme[1]);
     return d;
   };
   
   var personalCouplet=function(){
     var rhyme=c.pick(rhymingNouns);
     var d=[];
-    d.push(c.first({gender:'female'})+" "+pPhrase()+" "+c.pick(adjectives)+" "+rhyme[0]);
-    d.push(pPhrase()+", "+c.pick(adjectives)+" "+c.pick(adjectives)+" "+rhyme[1]);
+    d.push(c.first({gender:'female'})+" "+c.pick(verbs)+" "+pPhrase()+" "+c.pick(phrases)+" "+c.pick(articles)+" "+c.pick(adjectives)+" "+rhyme[0]);
+    d.push(pPhrase()+", "+c.pick(verbs)+" "+c.pick(articles)+" "+c.pick(adjectives)+" "+c.pick(adjectives)+" "+rhyme[1]);
     return d;
   };
   
@@ -98,7 +129,7 @@ var fauxPoe=function(seed){
     
     l2[1]=l2[1][0].toUpperCase()+(l2[1]).substring(1);
     
-    return l1[0]+",\n"+l2[0]+",\n"+l1[1]+",\n"+l2[1];
+    return l1[0]+",\n"+l2[0]+",\n"+l1[1]+",\n"+l2[1]+".";
   };
   
   d+=combineLines(couplet(), personalCouplet() );
