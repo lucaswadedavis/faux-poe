@@ -1,6 +1,4 @@
-var Chance=require("chance");
-
-module.exports=function(seed){
+var fauxPoe=function(seed){
   var c = seed ? new Chance(seed) : new Chance();
   var nouns=[
     "maiden",
