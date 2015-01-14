@@ -18,7 +18,7 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
+  "dependencies": {
     "chance": "~0.7.1"
   }
 }
