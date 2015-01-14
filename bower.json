@@ -16,7 +16,9 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "index.js",
+    "package.json"
   ],
   "dependencies": {
     "chance": "~0.7.1"
