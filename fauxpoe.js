@@ -1,5 +1,10 @@
 var fauxPoe=function(seed){
   var c = seed ? new Chance(seed) : new Chance();
+  
+  var maybe=function(likelihood,a,b){
+    return Math.random()<likelihood ? a : (b || "") ;    
+  };
+  
   var nouns=[
     "maiden",
     "mountain",
@@ -122,7 +127,14 @@ var fauxPoe=function(seed){
   var personalCouplet=function(){
     var rhyme=c.pick(rhymingNouns);
     var d=[];
-    d.push(c.first({gender:'female'})+" "+c.pick(verbs)+" "+pPhrase()+" "+c.pick(phrases)+" "+c.pick(articles)+" "+c.pick(adjectives)+" "+rhyme[0]);
+    var l1="";
+    l1+=c.first({gender:'female'});
+    l1+=" "+c.pick(verbs)+" "+pPhrase();
+    l1+=maybe(0.1," "+c.pick(phrases) );
+    l1+=maybe(0.9," "+c.pick(articles));
+    l1+=maybe(0.1," "+c.pick(adjectives) );
+    l1+=" "+rhyme[0];
+    d.push(l1);
     d.push(pPhrase()+", "+c.pick(verbs)+" "+c.pick(articles)+" "+c.pick(adjectives)+" "+c.pick(adjectives)+" "+rhyme[1]);
     return d;
   };
@@ -136,7 +148,7 @@ var fauxPoe=function(seed){
     
     l2[1]=l2[1][0].toUpperCase()+(l2[1]).substring(1);
     
-    return l1[0]+",\n"+l2[0]+",\n"+l1[1]+",\n"+l2[1]+".";
+    return l1[0]+",<br>"+l2[0]+",<br>"+l1[1]+",<br>"+l2[1]+".";
   };
   
   d+=combineLines(couplet(), personalCouplet() );

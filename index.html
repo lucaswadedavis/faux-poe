@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head><title>Faux Poe</title>
+<script type='text/javascript' src='bower_components/chance/chance.js'></script>
+<script type='text/javascript' src='fauxpoe.js'></script>
+
+<style type='text/css'>
+p{
+  border:1px solid #000;
+  padding:40px;
+  margin:120px;
+  background:#fff;
+  text-align:center;
+  cursor:pointer;
+  font-size:2em;
+}
+</style>
+
+<script type='text/javascript'>  
+var poe=function(){
+  document.getElementById("poetry").innerHTML=fauxPoe();
+};
+</script>
+
+</head>
+<body>
+<p id='poetry' onclick='poe()'></p>
+
+
+
+</body>
+</html>
